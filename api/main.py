@@ -3,7 +3,10 @@
 from __future__ import annotations
 
 import json
+import logging
+import os
 import sys
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
@@ -22,21 +25,49 @@ from insurellm_rag.config import CHAT_MODEL, COMPANY_NAME, EMBEDDING_MODEL
 from insurellm_rag.ingest import index_exists
 from insurellm_rag.pipeline import run_rag_pipeline
 
-app = FastAPI(
-    title="Insurellm Knowledge API",
-    version="2.0.0",
-    description="Production RAG API for the Insurellm enterprise assistant",
-)
+logger = logging.getLogger(__name__)
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
+
+def _cors_origins() -> list[str]:
+    origins = [
         "http://localhost:5173",
         "http://127.0.0.1:5173",
         "http://localhost:5174",
         "http://127.0.0.1:5174",
         "http://localhost:3000",
-    ],
+    ]
+    frontend = os.getenv("FRONTEND_URL", "").strip().rstrip("/")
+    if frontend:
+        origins.append(frontend)
+    return origins
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Build vector index on startup if missing (e.g. Render without ingest in build)."""
+    if not index_exists():
+        logger.warning("Index missing — running ingestion (may take a few minutes)...")
+        try:
+            from insurellm_rag.ingest import run_ingestion
+
+            run_ingestion(smart=False)
+            logger.info("Ingestion complete.")
+        except Exception as exc:
+            logger.error("Startup ingestion failed: %s", exc)
+    yield
+
+
+app = FastAPI(
+    title="Insurellm Knowledge API",
+    version="2.0.0",
+    description="Production RAG API for the Insurellm enterprise assistant",
+    lifespan=lifespan,
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=_cors_origins(),
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

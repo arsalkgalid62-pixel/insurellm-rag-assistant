@@ -129,6 +129,7 @@ flowchart TB
 | [docs/FRONTEND_ARCHITECTURE.md](docs/FRONTEND_ARCHITECTURE.md) | React component tree |
 | [docs/API.md](docs/API.md) | REST endpoints |
 | [docs/GITHUB_SETUP.md](docs/GITHUB_SETUP.md) | Push to GitHub |
+| [docs/DEPLOY.md](docs/DEPLOY.md) | **Deploy on Vercel + Render (free)** |
 
 ---
 

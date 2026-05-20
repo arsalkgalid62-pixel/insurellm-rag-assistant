@@ -1,6 +1,8 @@
 import type { DebugData, PipelineData, SourceChunk } from "../types";
 
-const API = "/api";
+/** Local dev uses Vite proxy (/api). Production sets VITE_API_URL to your Render service. */
+const API_BASE = (import.meta.env.VITE_API_URL || "").replace(/\/$/, "");
+const API = API_BASE ? `${API_BASE}/api` : "/api";
 
 export async function fetchHealth() {
   const r = await fetch(`${API}/health`);
@@ -81,8 +83,7 @@ export function streamChat(
               follow_ups: data.follow_ups,
               debug: data.debug,
             });
-          }
-          else if (data.type === "token") onToken(data.content);
+          } else if (data.type === "token") onToken(data.content);
           else if (data.type === "done") onDone();
         }
       }
