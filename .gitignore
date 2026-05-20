@@ -1,0 +1,42 @@
+# Environment and secrets
+.env
+.env.local
+*.pem
+
+# Vector database (build locally)
+data/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# IDE and OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Logs and caches
+*.log
+.chroma/
+.pytest_cache/
+
+# Gradio
+.gradio/
+
+# Node / React frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.local
+
+# npm debug logs
+npm-debug.log*
