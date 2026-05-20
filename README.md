@@ -46,7 +46,7 @@
 ### 1. Clone and configure
 
 ```bash
-git clone https://github.com/arsalkgalid/insurellm-rag-assistant.git
+git clone https://github.com/YOUR_GITHUB_USERNAME/insurellm-rag-assistant.git
 cd insurellm-rag-assistant
 
 python -m venv .venv
@@ -128,6 +128,7 @@ flowchart TB
 | [docs/DASHBOARD.md](docs/DASHBOARD.md) | React + FastAPI dashboard |
 | [docs/FRONTEND_ARCHITECTURE.md](docs/FRONTEND_ARCHITECTURE.md) | React component tree |
 | [docs/API.md](docs/API.md) | REST endpoints |
+| [docs/GITHUB_SETUP.md](docs/GITHUB_SETUP.md) | Push to GitHub |
 
 ---
 
