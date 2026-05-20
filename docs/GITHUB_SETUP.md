@@ -14,7 +14,9 @@ Your project is committed locally. Follow these steps to push.
 
 ## 2. Connect and push
 
-Replace `YOUR_GITHUB_USERNAME` with your actual GitHub username:
+Repository URL: `https://github.com/arsalkgalid62-pixel/insurellm-rag-assistant`
+
+Replace `YOUR_GITHUB_USERNAME` if using a fork:
 
 ```bash
 cd insurellm-rag-assistant

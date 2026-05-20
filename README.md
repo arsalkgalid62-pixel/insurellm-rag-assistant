@@ -46,7 +46,7 @@
 ### 1. Clone and configure
 
 ```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/insurellm-rag-assistant.git
+git clone https://github.com/arsalkgalid62-pixel/insurellm-rag-assistant.git
 cd insurellm-rag-assistant
 
 python -m venv .venv
