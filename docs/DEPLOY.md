@@ -45,9 +45,13 @@ Live stack:
 
 ### Verify API
 
-Open: `https://YOUR-SERVICE.onrender.com/api/health`
+| URL | Expected |
+|-----|----------|
+| `https://YOUR-SERVICE.onrender.com/` | Service info JSON (not `Not Found`) |
+| `https://YOUR-SERVICE.onrender.com/api/health` | `"index_ready": true` |
+| `https://YOUR-SERVICE.onrender.com/docs` | Swagger UI |
 
-Expect: `"index_ready": true`
+**Note:** Opening only the root used to show `{"detail":"Not Found"}` — use **`/api/health`** for health checks.
 
 **Note:** Free tier **sleeps** after ~15 min idle. First request after sleep may take 30–60s (cold start).
 

@@ -74,6 +74,25 @@ app.add_middleware(
 )
 
 
+@app.get("/")
+def root():
+    """Root URL — API lives under /api (browsers often open / only)."""
+    return {
+        "service": "Insurellm Knowledge API",
+        "status": "running",
+        "index_ready": index_exists(),
+        "docs": "/docs",
+        "health": "/api/health",
+        "endpoints": {
+            "health": "GET /api/health",
+            "stats": "GET /api/stats",
+            "chat": "POST /api/chat",
+            "stream": "POST /api/chat/stream",
+        },
+        "frontend": "Deploy React UI on Vercel — set VITE_API_URL to this service URL.",
+    }
+
+
 class Message(BaseModel):
     role: str
     content: str
