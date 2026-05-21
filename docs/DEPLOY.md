@@ -36,9 +36,10 @@ Live stack:
    ```
 6. **Start command:**
    ```bash
-   uvicorn api.main:app --host 0.0.0.0 --port $PORT
+   uvicorn main:app --host 0.0.0.0 --port $PORT
    ```
-7. **Health check path:** `/api/health`
+7. **Root directory:** leave **empty** (repo root — not `frontend` or `api`)
+8. **Health check path:** `/health` (also works: `/api/health`)
 8. **Environment variables:**
    - `OPENAI_API_KEY`
    - `FRONTEND_URL` (your Vercel URL, after step 2)
@@ -48,7 +49,8 @@ Live stack:
 | URL | Expected |
 |-----|----------|
 | `https://YOUR-SERVICE.onrender.com/` | Service info JSON (not `Not Found`) |
-| `https://YOUR-SERVICE.onrender.com/api/health` | `"index_ready": true` |
+| `https://YOUR-SERVICE.onrender.com/health` | `"index_ready": true` |
+| `https://YOUR-SERVICE.onrender.com/api/health` | same as above |
 | `https://YOUR-SERVICE.onrender.com/docs` | Swagger UI |
 
 **Note:** Opening only the root used to show `{"detail":"Not Found"}` — use **`/api/health`** for health checks.

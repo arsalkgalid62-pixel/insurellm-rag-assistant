@@ -82,9 +82,9 @@ def root():
         "status": "running",
         "index_ready": index_exists(),
         "docs": "/docs",
-        "health": "/api/health",
+        "health": "/health",
         "endpoints": {
-            "health": "GET /api/health",
+            "health": "GET /health or GET /api/health",
             "stats": "GET /api/stats",
             "chat": "POST /api/chat",
             "stream": "POST /api/chat/stream",
@@ -105,8 +105,7 @@ class ChatRequest(BaseModel):
     model: str | None = None
 
 
-@app.get("/api/health")
-def health():
+def _health_payload():
     return {
         "status": "ok",
         "index_ready": index_exists(),
@@ -114,6 +113,12 @@ def health():
         "default_model": CHAT_MODEL,
         "embedding_model": EMBEDDING_MODEL,
     }
+
+
+@app.get("/health")
+@app.get("/api/health")
+def health():
+    return _health_payload()
 
 
 @app.get("/api/stats")

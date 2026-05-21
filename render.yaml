@@ -7,8 +7,8 @@ services:
     runtime: python
     plan: free
     buildCommand: pip install --upgrade pip && pip install -r requirements.txt && python scripts/ingest.py
-    startCommand: uvicorn api.main:app --host 0.0.0.0 --port $PORT
-    healthCheckPath: /api/health
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
     envVars:
       - key: PYTHON_VERSION
         value: "3.10.0"
